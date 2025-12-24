@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h2>Trang quản trị</h2>
+<p>Xin chào, <span th:text="${#authentication.name}"></span>!</p>
+<p>Số danh mục: <span th:text="${categoryCount}"></span></p>
+<p>Số sản phẩm: <span th:text="${productCount}"></span></p>
+<p>Số người dùng: <span th:text="${userCount}"></span></p>
+<p>
+    <a th:href="@{/admin/categories}">Quản lý danh mục</a> |
+    <a th:href="@{/admin/products}">Quản lý sản phẩm</a> |
+    <a th:href="@{/logout}">Đăng xuất</a>
+</p>
+</body>
+</html>

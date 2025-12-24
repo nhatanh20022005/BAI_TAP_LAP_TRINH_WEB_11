@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý sản phẩm</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h2>Quản lý sản phẩm</h2>
+<table>
+    <tr>
+        <th>Tiêu đề</th>
+        <th>Số lượng</th>
+        <th>Mô tả</th>
+        <th>Giá</th>
+        <th>Danh mục</th>
+    </tr>
+    <tr th:each="prod : ${products}">
+        <td th:text="${prod.title}"></td>
+        <td th:text="${prod.quantity}"></td>
+        <td th:text="${prod.desc}"></td>
+        <td th:text="${prod.price}"></td>
+        <td th:text="${prod.category.name}"></td>
+    </tr>
+</table>
+
+<h3>Tạo sản phẩm mới</h3>
+<form th:action="@{/admin/products}" method="post" th:object="${productForm}">
+    <div>
+        <label for="title">Tiêu đề:</label>
+        <input type="text" id="title" th:field="*{title}" />
+        <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+    </div>
+    <div>
+        <label for="quantity">Số lượng:</label>
+        <input type="number" id="quantity" th:field="*{quantity}" />
+        <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
+    </div>
+    <div>
+        <label for="desc">Mô tả:</label>
+        <textarea id="desc" th:field="*{desc}"></textarea>
+    </div>
+    <div>
+        <label for="price">Giá:</label>
+        <input type="number" step="0.01" id="price" th:field="*{price}" />
+        <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+    </div>
+    <div>
+        <label for="categoryId">Danh mục:</label>
+        <select id="categoryId" th:field="*{categoryId}">
+            <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+        </select>
+        <div th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}"></div>
+    </div>
+    <div>
+        <button type="submit">Lưu</button>
+    </div>
+</form>
+
+<p><a th:href="@{/admin/home}">Quay lại trang quản trị</a></p>
+</body>
+</html>
